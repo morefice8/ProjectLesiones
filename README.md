@@ -26,37 +26,43 @@ Here are some sample SQL queries to demonstrate the capabilities of `lesionesDB`
 
 1. **List players and the injuries they have suffered:**
    ```sql
-   SELECT j.nombre_jugador, l.nombre_lesion
-   FROM jugador j
-   JOIN jugador_lesion jl ON j.dni_jugador = jl.dni_jugador
-   JOIN lesion l ON jl.id_lesion = l.id_lesion;
+   select j.nombre_jugador, l.nombre_lesion 
+   from lesionesdb.jugador j 
+   join lesionesdb.jugador_lesion jl 
+	   on j.dni_jugador = jl.dni_jugador 
+   join lesionesdb.lesion l 
+	   on l.id_lesion = jl.id_lesion ;
    ```
 
 2. **List treatments and the specialists who perform them:**
    ```sql
-   SELECT t.nombre_tratamiento, e.nombre_especialista
-   FROM tratamiento t
-   JOIN tratamiento_especialista te ON t.id_tratamiento = te.id_tratamiento
-   JOIN especialista e ON te.dni_especialista = e.dni_especialista;
+   select t.nombre_tratamiento, e.nombre_especialista 
+   from lesionesdb.tratamiento t 
+   join lesionesdb.tratamiento_especialista te 
+	   on t.id_tratamiento = te.id_tratamiento 
+   join lesionesdb.especialista e 
+	   on e.dni_especialista = te.dni_especialista ;
    ```
 
 3. **Find the most common injury and how many times it has occurred:**
    ```sql
-   SELECT l.nombre_lesion, COUNT(jl.id_lesion) AS frecuencia
-   FROM lesion l
-   JOIN jugador_lesion jl ON l.id_lesion = jl.id_lesion
-   GROUP BY l.nombre_lesion
-   ORDER BY frecuencia DESC
-   LIMIT 1;
+   select l.nombre_lesion, count(jl.id_lesion) as frecuencia 
+   from lesionesdb.lesion l 
+   join lesionesdb.jugador_lesion jl 
+	   on l.id_lesion = jl.id_lesion 
+   group by l.id_lesion 
+   order by frecuencia desc 
+   limit 1 ;
    ```
 
 4. **Obtain the specialists who have worked on at least 3 distinct treatments:**
    ```sql
-   SELECT e.dni_especialista, e.nombre_especialista, COUNT(DISTINCT te.id_tratamiento) AS tratamientos_distintos
-   FROM especialista e
-   JOIN tratamiento_especialista te ON e.dni_especialista = te.dni_especialista
-   GROUP BY e.dni_especialista, e.nombre_especialista
-   HAVING COUNT(DISTINCT te.id_tratamiento) >= 3;
+   select e.nombre_especialista, count(distinct jlte.id_tratamiento) as distintos_tratamientos_efectuados 
+   from lesionesdb.especialista e 
+   join lesionesdb.jugador_lesion_tratamiento_especialista jlte 
+	   on e.dni_especialista = jlte.dni_especialista
+   group by jlte.dni_especialista 
+   having count(distinct jlte.id_tratamiento) >= 3 ; 
    ```
 
 ## How to Use
