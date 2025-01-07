@@ -1,7 +1,7 @@
 # ProjectLesiones
 
 ## Overview
-`ProjectLesiones` is a SQL-based project designed to manage and analyze data related to sports injuries, treatments, and specialists. The database provides insights into the types of injuries, treatments administered, and the specialists involved in the treatment process.
+`ProjectLesiones` is a SQL-based project designed to manage and analyze simulated data related to football injuries, treatments and specialists. The database provides insights into the types of injuries, treatments administered and the specialists involved in the treatment process.
 
 ## Features
 - **Player Management**: Store and manage information about players, including their personal details and injury records.
@@ -67,5 +67,5 @@ Here are some sample SQL queries to demonstrate the capabilities of `lesionesDB`
 
 ## How to Use
 1. **Setup**: Create the database and tables using the provided `LesionesDB` SQL script.
-2. **Data Entry**: Populate the tables with relevant data for players, injuries, treatments, and specialists. In the same `LesionesDB` SQL script there are already some fake data entries that cna be used for educational purposes.
+2. **Data Entry**: Populate the tables with relevant data for players, injuries, treatments, and specialists. The `LesionesDB` SQL script already includes some simulated data entries that can be utilized for educational purposes.
 3. **Query**: Use the sample queries provided in `ExploratoryQueries` SQL script or write your own queries to extract insights and analyze the data.
